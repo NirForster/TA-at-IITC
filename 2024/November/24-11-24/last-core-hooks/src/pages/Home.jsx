@@ -3,10 +3,14 @@ import reactLogo from "../assets/react.svg";
 import viteLogo from "/vite.svg";
 
 // React Router Dom Imports
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const Home = () => {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [isApple, setIsApple] = useState(false);
+  const [isAsus, setIsAsus] = useState(false);
+  const [isHacker, setIsHacker] = useState(false);
+  const [isDell, setIsDell] = useState(false);
 
   return (
     <>
@@ -31,8 +35,22 @@ const Home = () => {
         Click on the Vite and React logos to learn more
       </p>
       <button>
-        <Link to={'/sign-in'}>
-            Sign IN
+        <Link to="/sign-in">Sign IN</Link>
+      </button>
+      {/* <button onClick={() => setIsApple((v) => !v)}>Apple</button>
+      <button onClick={() => setIsAsus((v) => !v)}>Asus</button>
+      <button onClick={() => setIsHacker((v) => !v)}>Hacker</button>
+      <button onClick={() => setIsDell((v) => !v)}>Dell</button> */}
+      <button>
+        <Link
+          to={`/query-print?apple=${isApple}&asus=${isAsus}&dell=${isDell}&hacker=${isHacker}`}
+        >
+          Query Print
+        </Link>
+      </button>
+      <button>
+        <Link to='/dummy'>
+          Dummy Page
         </Link>
       </button>
     </>
