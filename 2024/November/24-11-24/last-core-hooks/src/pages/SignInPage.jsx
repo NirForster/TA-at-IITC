@@ -1,14 +1,28 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
+  const [btnText, setBtnText] = useState("Submit");
+  const [displayPassword, setDisplayPassword] = useState(false);
+
   const pswdRef = useRef();
+  const navigate = useNavigate();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    
     console.log(email);
     console.log(pswdRef.current.value);
+    setBtnText("Loading...");
+    setTimeout(() => {
+      alert("Succefully Signed in");
+      setEmail("");
+      pswdRef.current.value = "";
+      setBtnText("Submit");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
+    }, 3000);
   };
 
   return (
@@ -36,8 +50,20 @@ const SignInPage = () => {
 
         {/* Password */}
         <label htmlFor="password">Password: </label>
-        <input ref={pswdRef} type="password" id="password" name="password" />
-        <button type="submit">Submit</button>
+        <input
+          ref={pswdRef}
+          type={displayPassword ? "text" : "password"}
+          id="password"
+          name="password"
+        />
+        <label for="showPassword"> Show Password</label>
+        <input
+          type="checkbox"
+          id="showPassword"
+          name="showPassword"
+          onClick={() => setDisplayPassword((currentState) => !currentState)}
+        />
+        <button type="submit">{btnText}</button>
       </form>
     </>
   );
