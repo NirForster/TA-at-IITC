@@ -15,13 +15,21 @@ const cartSlice = createSlice({
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
       );
-      if (existingItem) {
-        console.log("in the cart");
+
+      if (!existingItem) {
+        state.items.push(action.payload);
+        // state.totalPrice += action.payload.price;
+      } else {
+        existingItem.quantity += action.payload.quantity
+        existingItem.totalItemPrice += action.payload.totalItemPrice
       }
 
-      state.items.push(action.payload);
-      state.totalQuantity++;
-      state.totalPrice += action.payload.price;
+      state.items.forEach((item) => {
+        state.totalPrice += item.totalItemPrice
+        state.totalQuantity += item.quantity
+      })
+    //   state.totalPrice = state.items.reduce((acc, item) => acc + item.totalItemPrice, 0)
+    //   state.
     },
     removeItem: (state, action) => {
       // 1. Find Item Index
