@@ -29,6 +29,7 @@ const cartSlice = createSlice({
         state.totalQuantity += item.quantity
       })
     //   state.totalPrice = state.items.reduce((acc, item) => acc + item.totalItemPrice, 0)
+    //   state.totalQuantity = state.items.reduce((acc, item) => acc + item.quantity, 0)
     //   state.
     },
     removeItem: (state, action) => {
