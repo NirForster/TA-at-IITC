@@ -24,14 +24,17 @@ const cartSlice = createSlice({
         existingItem.totalItemPrice += action.payload.totalItemPrice
       }
 
-      state.items.forEach((item) => {
-        state.totalPrice += item.totalItemPrice
-        state.totalQuantity += item.quantity
-      })
+    //   state.items.forEach((item) => {
+    //     state.totalPrice += item.totalItemPrice
+    //     state.totalQuantity += item.quantity
+    //   })
+
+        state.totalQuantity += action.payload.quantity
+        state.totalPrice += action.payload.totalItemPrice
     //   state.totalPrice = state.items.reduce((acc, item) => acc + item.totalItemPrice, 0)
     //   state.totalQuantity = state.items.reduce((acc, item) => acc + item.quantity, 0)
-    //   state.
     },
+    
     removeItem: (state, action) => {
       // 1. Find Item Index
       const itemIndex = state.items.findIndex(
