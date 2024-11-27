@@ -5,14 +5,14 @@ import { addItem } from "../store/slices/cartSlice.js";
 import { useDispatch } from "react-redux";
 
 const ProductItem = ({ item }) => {
-    const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(1);
 
   const dispatch = useDispatch();
   function handleAddItem(item) {
     const itemData = {
       ...item,
-      quantity: 1,
-      totalItemPrice: item.price,
+      quantity,
+      totalItemPrice: item.price * quantity,
     };
 
     dispatch(addItem(itemData));
