@@ -16,10 +16,12 @@ const hashKey = "PeogG3lBZpSErxuBgrAA0Y6ermcD04XGGeTn7uUYfLvOFEvdaW";
 // Middle
 dotenv.config();
 app.use(express.json());
-app.use(cors({
-  origin: 'http://localhost:5173', // Your frontend's origin
-  credentials: true, // Enable credentials (cookies, etc.)
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Your frontend's origin
+    credentials: true, // Enable credentials (cookies, etc.)
+  })
+);
 
 console.log(userModel);
 
@@ -91,19 +93,46 @@ app.post("/sign-in", async (req, res) => {
         { expiresIn: "1h" }
       );
 
-      res.cookie('jwt', token, {
-        httpOnly: true,  // Prevents JavaScript access to the cookie
-        secure: process.env.NODE_ENV === 'production', // Use HTTPS in production
-        sameSite: 'strict', // Protects against CSRF
-        maxAge: 3600000 // 1 hour in milliseconds
+      res.cookie("jwt", token, {
+        httpOnly: false, // Prevents JavaScript access to the cookie
+        secure: true,
+        sameSite: "strict", // Protects against CSRF
+        maxAge: 3600000, // 1 hour in milliseconds
       });
-      res.json({ message: 'Logged in successfully' });
+      res.json({ message: "Logged in successfully" });
     } else {
       return res.status(401).send({
         error: "Error",
       });
     }
   } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+app.get("/users/get-self", async (req, res) => {
+  try {
+    let jwtSecretKey = process.env.JWT_SECRET_KEY;
+
+    const token = req.headers.authorization.split(" ")[1];
+    // verify a token symmetric
+    const decoded = await jwt.verify(token, jwtSecretKey);
+    res.send(decoded)
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+});
+
+app.get("/users/:id", async (req, res) => {
+  try {
+    // Get Params:
+    const { id } = req.params;
+    res.send({
+      id,
+    });
+  } catch (error) {
+    console.log(error);
     res.status(500).send(error);
   }
 });
