@@ -66,6 +66,7 @@ app.post("/sign-in", async (req, res) => {
     res.status(500).send(error);
   }
 });
+
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
 });
