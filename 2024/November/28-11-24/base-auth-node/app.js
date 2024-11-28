@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const cors = require("cors")
 
 const app = express();
 
@@ -9,7 +10,9 @@ const hashKey = "PeogG3lBZpSErxuBgrAA0Y6ermcD04XGGeTn7uUYfLvOFEvdaW";
 
 const dummyUser = {};
 
+// Middle
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.status(200).send({
