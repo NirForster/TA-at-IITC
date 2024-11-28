@@ -1,6 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const cors = require("cors")
+const dotenv = require('dotenv')
+const mongoose = require('mongoose')
 
 const app = express();
 
@@ -11,14 +13,21 @@ const hashKey = "PeogG3lBZpSErxuBgrAA0Y6ermcD04XGGeTn7uUYfLvOFEvdaW";
 const dummyUser = {};
 
 // Middle
+dotenv.config()
 app.use(express.json());
 app.use(cors());
+
+// Connect To mongoDB
+mongoose.connect(process.env.DB_URI).then(()=> {
+  console.log("Succefully Connected to DB");
+})
 
 app.get("/", (req, res) => {
   res.status(200).send({
     message: "Hello from the server!",
   });
 });
+
 
 app.post("/sign-up", async (req, res) => {
   try {
