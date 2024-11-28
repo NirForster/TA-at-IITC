@@ -1,16 +1,22 @@
 import './App.css'
-import { useDispatch, useSelector } from 'react-redux' 
+import { useSelector } from 'react-redux' 
+import Cookies from "js-cookie";
 
 // import components
 import Signin from './components/Signin'
 import Signup from './components/SIgnup'
+import { useEffect } from 'react'
 
 function App() {
+  console.log(Cookies.get("jwt"));
+  
   const user = useSelector((state) => state.user)
-  const dispatch = useDispatch()
 
   console.log(user);
   
+  useEffect(() => {
+
+  }, [])
   return (
       <div>
         <h1>Redux and auth and jwt</h1>
