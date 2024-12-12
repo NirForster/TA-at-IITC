@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
 const app = express();
 
@@ -38,8 +39,11 @@ const jokes = [
 ];
 
 app.use(express.json());
+dotenv.config();
 
-mongoose.connect("mongodb+srv://lironefit:FiXSGqvTlq7Zb0EZ@cluster0.e2j9t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0").then(() => {
+console.log(process.env);
+
+mongoose.connect(process.env.MONGO_URI).then(() => {
     console.log("Connected to MongoDB");
 })
 
