@@ -35,7 +35,9 @@ const jokes = [
   },
 ];
 
-
-
+router.get("/random", (req, res) => {
+  const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+  res.send(randomJoke);
+});
 
 module.exports = router;

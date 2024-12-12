@@ -24,13 +24,7 @@ app.get("/say-my-name", (req, res) => {
   res.send(`Hello ${name}`);
 });
 
-app.get("/jokes/random", (req, res) => {
-  const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-  res.send(randomJoke);
-});
-
 app.use("/jokes", jokesRoutes);
-
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
