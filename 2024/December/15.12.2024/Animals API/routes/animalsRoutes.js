@@ -22,11 +22,16 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/random', (req, res) => {
+    // console.log(Math.floor(Math.random() * animals.length));
+    const randAnimal = animals[Math.floor(Math.random() * animals.length)]
+    res.send(randAnimal)
+})
+
 // GET /animals/:id: Return a single animal by ID
 router.get('/:id', (req, res) => {
     // Step 1: Get ID from req.params
     const { id } = req.params
-    // console.log(id);
 
     // Find Animal with matching id
     animals.forEach(animal => {
@@ -38,7 +43,6 @@ router.get('/:id', (req, res) => {
 
     // if id not found, then return and error
     res.status(404).send(`Animal with id: ${id} does not exsit`)
-
 })
 
 module.exports = router
