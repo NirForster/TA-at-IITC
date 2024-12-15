@@ -1,5 +1,5 @@
 const express = require('express');
-
+const Joke = require('../models/Joke.model');
 const router = express.Router();
 
 let jokes = [
@@ -8,43 +8,73 @@ let jokes = [
 ];
 
 // Get all jokes
-router.get('/jokes', (req, res) => {
-    res.json(jokes);
-});
-
-// Get a single joke by ID
-router.get('/jokes/:id', (req, res) => {
-    const joke = jokes.find(j => j.id === parseInt(req.params.id));
-    if (!joke) return res.status(404).send('Joke not found');
-    res.json(joke);
+router.get('/', async (req, res) => {
+    try {
+        const jokes = await Joke.find();
+        res.json(jokes);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 // Create a new joke
-router.post('/jokes', (req, res) => {
-    const newJoke = {
-        id: jokes.length + 1,
-        joke: req.body.joke
-    };
-    jokes.push(newJoke);
-    res.status(201).json(newJoke);
+router.post('/', async (req, res) => {
+    try {
+        console.log(req.body);
+        const result = await Joke.create(req.body);
+        console.log(result);
+        
+        res.status(201).json(result);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
+// Get a single joke by ID
+router.get('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        const joke = await Joke.findById(id);
+        if (!joke) throw new Error('Joke not found');
+        
+       return res.json(joke);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 // Update a joke by ID
-router.put('/jokes/:id', (req, res) => {
-    const joke = jokes.find(j => j.id === parseInt(req.params.id));
-    if (!joke) return res.status(404).send('Joke not found');
+router.put('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const joke = await Joke.findByIdAndUpdate(id, req.body, { new: true });
 
-    joke.joke = req.body.joke;
-    res.json(joke);
+        if (!joke) throw new Error('Joke not found');
+
+        res.send({
+            message: 'Joke updated successfully',
+            joke
+        })
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 // Delete a joke by ID
-router.delete('/jokes/:id', (req, res) => {
-    const jokeIndex = jokes.findIndex(j => j.id === parseInt(req.params.id));
-    if (jokeIndex === -1) return res.status(404).send('Joke not found');
+router.delete('/:id', async (req, res) => {
+   try {
+        const { id } = req.params;
+        const joke = await Joke.findByIdAndDelete(id);
 
-    jokes.splice(jokeIndex, 1);
-    res.status(204).send();
+        if (!joke) throw new Error('Joke not found');
+
+        res.send({
+            message: 'Joke deleted successfully',
+        })
+   } catch (error) {
+    
+   }
 });
 
 module.exports = router;

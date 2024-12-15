@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const jokesRouter = require('./routes/jokeRoutes');
 const dotenv = require('dotenv');
+// const Joke = require('./models/Joke.model');
 
 dotenv.config();
 
