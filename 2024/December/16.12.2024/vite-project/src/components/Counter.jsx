@@ -1,8 +1,4 @@
-import { useState } from "react";
-
-function Counter() {
-    const [count, setCount] = useState(0);
-
+function Counter({ setCount, count, name }) {
   function counterUp() {
     setCount(count + 1);
   }
@@ -16,6 +12,8 @@ function Counter() {
       <button onClick={counterUp}>+</button>
       <p>count is {count}</p>
       <button onClick={counterDown}>-</button>
+
+      <p>My name is {name}</p>
     </div>
   );
 }
