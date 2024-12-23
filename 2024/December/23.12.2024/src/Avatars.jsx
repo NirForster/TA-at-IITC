@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Avatar } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import AvatarGroup from "@mui/material/AvatarGroup";
 
 const DUMMY_USERS = [
   {
@@ -19,23 +20,32 @@ const DUMMY_USERS = [
 
 export default function ImageAvatars() {
   const getIntials = (fullname) => {
-    const splittedName = fullname.split(" ")
-    
-    let shortName = ""
-    splittedName.forEach((str) => {
-        shortName += str[0]
-    })
+    const splittedName = fullname.split(" ");
 
-    return shortName
+    let shortName = "";
+    splittedName.forEach((str) => {
+      shortName += str[0];
+    });
+
+    return shortName;
   };
 
   return (
-    <Stack direction="row" spacing={2}>
+    <AvatarGroup max={2}>
       {DUMMY_USERS.map((user) => (
-        <Avatar key={user.name} alt={user.name} src={user.url}>
+        <Avatar
+          sx={{
+            width: "20vw",
+            height: "20vw",
+          }}
+          key={user.name}
+          alt={user.name}
+          src={user.url}
+          variant="square"
+        >
           {getIntials(user.name)}
         </Avatar>
       ))}
-    </Stack>
+    </AvatarGroup>
   );
 }
