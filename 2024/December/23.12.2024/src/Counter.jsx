@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+// Components
+import ImageAvatars from './Avatars'
+
 const Counter = () => {
   const [count, setCount] = useState(0);
   const [data, setData] = useState([]);
@@ -14,18 +17,19 @@ const Counter = () => {
     setCount(count - 1);
   };
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((response) => response.json())
-      .then((data) => setData(data));
-  }, [count]);
+//   useEffect(() => {
+//     fetch("https://jsonplaceholder.typicode.com/todos")
+//       .then((response) => response.json())
+//       .then((data) => setData(data));
+//   }, []);
 
   return (
     <div>
       <h1>Counter: {count}</h1>
-      <div>{JSON.stringify(data)}</div>
+      <ImageAvatars />
       <button onClick={increment}>Increment</button>
       <button onClick={decrement}>Decrement</button>
+      {/* <div>{JSON.stringify(data)}</div> */}
     </div>
   );
 };
