@@ -4,7 +4,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-import Counter from './Counter'
+import Counter from './components/Counter'
+import Signup from './components/Signup'
 
 function App() {
   const [state, setState] = useState(0)
@@ -20,13 +21,14 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <Counter />
+        <Signup />
+        {/* <Counter /> */}
       </div>
-      <h2>Counter: {state}</h2>
+      {/* <h2>Counter: {state}</h2>
       <button onClick={() => setState((prev) => prev + 1)}>Increment</button>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
+      </p> */}
     </>
   )
 }
