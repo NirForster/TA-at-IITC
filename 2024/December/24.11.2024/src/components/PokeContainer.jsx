@@ -8,7 +8,7 @@ const PokeContainer = () => {
   const [pokemons, setPokemons] = useState([]);
 
   const fetchPokemons = async () => {
-    const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon/");
+    const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon/");    
     setPokemons(data.results);
   };
 
@@ -16,7 +16,7 @@ const PokeContainer = () => {
     fetchPokemons();
   }, []);
 
-  console.log(pokemons);
+//   console.log(pokemons);
 
   return (
     <>
