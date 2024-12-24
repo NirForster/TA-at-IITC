@@ -8,7 +8,9 @@ const PokeContainer = () => {
   const [pokemons, setPokemons] = useState([]);
 
   const fetchPokemons = async () => {
-    const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon/");    
+    const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon/");
+    // console.log(data.results);
+
     setPokemons(data.results);
   };
 
@@ -16,17 +18,24 @@ const PokeContainer = () => {
     fetchPokemons();
   }, []);
 
-//   console.log(pokemons);
+  //   console.log(pokemons);
 
   return (
-    <>
-      <h1>This is Pokemons Container</h1>
-      <ul>
-        {pokemons.map((pokemon) => {
-          return <PokemonCard key={pokemon.name} pokemon={pokemon} />
-        })}
-      </ul>
-    </>
+    pokemons.length > 0 && (
+      <>
+        <h1>This is Pokemons Container</h1>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "4vh"
+        }}>
+          {pokemons.map((pokemon) => {
+            return <PokemonCard key={pokemon.name} pokemon={pokemon} />;
+          })}
+        </div>
+      </>
+    )
   );
 };
 
