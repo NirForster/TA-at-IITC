@@ -6,6 +6,7 @@ import './index.css'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 import PokemonPage from './pages/PokemonPage'
+import SinglePokemonPage from './pages/SinglePokemonPage'
 import NotFound from './pages/NotFound'
 
 // Components
@@ -17,10 +18,8 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage/>} />
-        <Route path='/pokemons' element={<PokemonPage />} >
-          <Route path="yoav" element={<h1>Yoav Header</h1>}/>
-          <Route path=":id" element={<h1>Test Header</h1>}/>
-        </Route>
+        <Route path='/pokemons' element={<PokemonPage />}/>
+        <Route path="/pokemons/:id" element={<SinglePokemonPage />}/>
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
