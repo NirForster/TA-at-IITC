@@ -27,4 +27,10 @@ userSchema.virtual("fullname").get(function() {
   return `${this.fName} ${this.lName}`; // Access instance properties with 'this'
 });
 
+userSchema.virtual("jokes", {
+  ref: "Joke",
+  localField: "_id",
+  foreignField: "author"
+})
+
 module.exports = mongoose.model('User', userSchema)

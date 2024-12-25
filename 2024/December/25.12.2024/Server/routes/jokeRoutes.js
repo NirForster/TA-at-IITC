@@ -5,7 +5,8 @@ const {
     getJokeById,
     updateJoke,
     deleteJoke,
-    getRandomJoke
+    getRandomJoke,
+    getJokeByAuthorId
 } = require('../controllers/jokesController.js');
 
 const router = express.Router();
@@ -21,6 +22,10 @@ router.post('/', createJoke);
 // Get a random joke
 //? DONE: Add to Postman
 router.get('/random', getRandomJoke);
+
+// Get Joke by author (User) id
+// TODO: Add to Postman
+router.get('/user/:id', getJokeByAuthorId)
 
 // Get a single joke by ID
 //? DONE: Add to Postman

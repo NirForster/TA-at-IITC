@@ -34,6 +34,19 @@ const getJokeById = async (req, res) => {
   }
 };
 
+const getJokeByAuthorId = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const jokes = await Joke.find({ author: id });
+    if (!jokes) throw new Error("Jokes not found");
+
+    return res.json(jokes);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+} 
+
 const updateJoke = async (req, res) => {
   try {
     const { id } = req.params;
@@ -91,5 +104,6 @@ module.exports = {
     getJokeById,
     updateJoke,
     deleteJoke,
-    getRandomJoke
+    getRandomJoke,
+    getJokeByAuthorId
 }
