@@ -37,6 +37,16 @@ const getJokeById = async (req, res) => {
 const updateJoke = async (req, res) => {
   try {
     const { id } = req.params;
+
+    // Vlidate the request body
+    if (!req.body.setup) {
+      throw new Error("You must provide a setup");
+    }
+
+    if (!req.body.punchiline) {
+      throw new Error("You must provide a punchline");
+    }
+
     const joke = await Joke.findByIdAndUpdate(id, req.body, { new: true });
 
     if (!joke) throw new Error("Joke not found");
