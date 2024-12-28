@@ -26,3 +26,13 @@ input_field = driver.find_element("name", "search")
 print("Input Placeholder:", input_field.get_attribute("placeholder"))
 
 driver.quit()
+
+# -----------------------------------------------
+
+# Locate a navigation link using CSS Selector
+nav_link = driver.find_element("css_selector", "nav > ul > li.active > a")
+
+# Locate an input field by attribute
+search_input = driver.find_element("css_selector", "input[name='search']")
+
+
