@@ -4,29 +4,24 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
-from datetime import datetime
 
 service = Service()
 options = webdriver.ChromeOptions()
-options.add_argument("--window-size=2560,1440")
 # options.add_argument('--headless')
 driver = webdriver.Chrome(service=service, options=options)
 
 driver.get("http://localhost:5173")
 
-now_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-driver.save_screenshot(f"./screenshots/page_full_screen_{now_time}.png")
-
 # Assert page title
 assert "Vite + React" in driver.title, "The title doesn't match the expected value"
 
 try:
-    mail_input = WebDriverWait(driver, 3).until(
-        EC.presence_of_element_located((By.XPATH, "//input[@id=':r3:']"))
+    button = WebDriverWait(driver, 3).until(
+        EC.presence_of_element_located((By.XPATH, "//button[@class='bg-red-500 text-white px-4 py-2']"))
     )
-    mail_input.screenshot("./test.png")
     
-    assert mail_input.is_displayed(), "The Button disn't displayed"
+    button.screenshot("./test.png")
+    assert button.is_displayed(), "The Button disn't displayed"
 except AssertionError as e:
     print(e)
 except TimeoutException:
