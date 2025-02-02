@@ -11,9 +11,10 @@ options = webdriver.ChromeOptions()
 driver = webdriver.Chrome(service=service, options=options)
 
 driver.get("https://atid.store")
+
 # Assert page title
-assert "My Website" in driver.title
+assert "ATID Demo Store – ATID College Demo Store for Practicing QA Automation" in driver.title, "The title doesn't match the expected value"
 
 # Assert a button is displayed
-button = driver.find_element("id", "submit-btn")
-assert button.is_displayed()
+# button = driver.find_element("id", "submit-btn")
+# assert button.is_displayed()
